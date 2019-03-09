@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Train Schedule</title>
+    <!-- css reset link -->
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <!-- bootstrap link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- custom CSS sheet -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <!-- Moment.js Reference -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+</head>
+
+<body>
+    <!-- Train Schedule page container -->
+    <div class="container">
+        <!-- Main heading jumbotron on page -->
+        <div class="jumbotron">
+            <h1 class="text-center">Train Schedule</h1>
+            <h3 class="text-center">Choo Choo. Chee Chee.</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Current Trains-->
+                <div class="card mb-4">
+                    <div class="card-header">Current Train Schedule</div>
+                    <div class="card-body">
+                        <table class="table table-sm table-hover" id='train-table'>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Train Name</th>
+                                    <th scope="col">Destination</th>
+                                    <th scope="col">Frequency (min)</th>
+                                    <th scope="col">Next Arrival Time</th>
+                                    <th scope="col">Minutes Away</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Add Train Card-->
+                <div class="card mb-4">
+                    <div class="card-header">Add Train</div>
+                    <div class="card-body">
+                        <!-- Entry Form -->
+                        <form>
+                            <div class="form-group">
+                                <label for="train-name-input">Train Name</label>
+                                <input class="form-control" id="train-name-input" placeholder="Tori Express"
+                                    type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="dest-input">Destination</label>
+                                <input class="form-control" id="dest-input" placeholder="Disney World" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="start-time-input">First Train Time (HH:mm - military time)</label>
+                                <input class="form-control" id="start-time-input" placeholder="24:00" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="freq-input">Frequency (min)</label>
+                                <input class="form-control" id="freq-input" placeholder="100" type="text">
+                            </div>
+                            <button class="btn btn-light float-left" id="add-train-btn">Submit</button>
+                            <br>
+                            <p id="new-train"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- link to external js file -->
+<script src="app.js"></script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- bootstrap js links -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
