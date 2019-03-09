@@ -20,7 +20,7 @@ $("#add-train-btn").on("click", function (event) {
   var trainStartTime = moment($("#start-time-input").val().trim(), "HH:mm").format("X");
   var trainFreq = $("#freq-input").val().trim();
   // console.log(trainName + trainDest + trainStartTime + trainFreq);
-  
+
   // object of new train data
   var newTrain = {
     name: trainName,
@@ -48,11 +48,34 @@ database.ref().on("child_added", function (childSnapshot) {
   var trainDest = childSnapshot.val().dest;
   var trainStartTime = childSnapshot.val().start;
   var trainFreq = childSnapshot.val().freq;
-  // console.log(trainName + trainDest + trainStartTime + trainFreq);
 
-  var trainStartTimePretty = moment.unix(trainStartTime).format("HH:MM");
-  console.log(trainStartTimePretty);
+        // var trainStartTimePretty = moment(trainStartTime, "X").format("HH:mm");
 
+  // current time 
+  var currentTime = moment().format("X");
+        // var currentTimePretty = moment(currentTime, "X").format("HH:mm");
+  console.log(currentTime);
+        
+
+  // difference in time between first train and current time
+  var diff = currentTime - trainStartTime;
+  console.log(diff);
+  
+  // number of trips that can be completed within diff window of time
+  var trainTrip = diff % trainFreq;
+  console.log(trainTrip);
+
+  // trainTrip + 1 = next trip, multiply by train freq to get total time
+  // add to train start time
+  var nextArrival = ((trainTrip + 1) * trainFreq) + trainStartTime;
+  // make it pretty to display
+  var nextArrivalPretty = moment(nextArrival, "X").format("HH:mm a");
+  console.log(nextArrivalPretty);
+
+
+  var minAway = nextArrival - currentTime;
+  var minAwayPretty = moment(minAway, "X").format("mm");
+  console.log(minAwayPretty);
 
 
   // Create the new row
@@ -60,8 +83,8 @@ database.ref().on("child_added", function (childSnapshot) {
     $("<td>").text(trainName),
     $("<td>").text(trainDest),
     $("<td>").text(trainFreq),
-    $("<td>").text("next arrival"),
-    $("<td>").text("minutes away")
+    $("<td>").text(nextArrivalPretty),
+    $("<td>").text(minAwayPretty)
   );
   // Append the new row to the table
   $("#train-table > tbody").append(newRow);
