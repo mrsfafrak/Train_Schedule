@@ -11,6 +11,8 @@
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- google font options -->
     <link href="https://fonts.googleapis.com/css?family=Acme|Anton|Bree+Serif|Fjalla+One|Righteous" rel="stylesheet">
+    <!-- animate reference -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <!-- custom CSS sheet -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <!-- Firebase Reference -->
@@ -24,18 +26,18 @@
     <div class="container">
         <!-- Main heading jumbotron on page -->
         <div class="jumbotron train-table train-card">
-            <h1 class="text-center">Tori's Train Station</h1>
-            <h3 class="text-center">Where do you want to go?</h3>
+            <h1 class="text-center animated zoomIn">Tori's Train Station</h1>
+            <h3 class="text-center animated zoomIn">Where do you want to go?</h3>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <!-- Current Trains-->
-                <div class="card mb-4 train-card">
+                <div class="card mb-4 train-card animated zoomIn">
                     <div class="card-header train-table">Current Train Schedule</div>
                     <div class="card-body">
                         <table class="table table-sm table-hover form-detail" id='train-table'>
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col">Train Name</th>
                                     <th scope="col">Destination</th>
                                     <th scope="col">Frequency (min)</th>
@@ -43,7 +45,7 @@
                                     <th scope="col">Minutes Away</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                             </tbody>
                         </table>
                     </div>
@@ -53,7 +55,7 @@
         <div class="row">
             <div class="col-md-12">
                 <!-- Add Train Card-->
-                <div class="card mb-4 train-card">
+                <div class="card mb-4 train-card animated zoomIn">
                     <div class="card-header train-table">Add Train</div>
                     <div class="card-body">
                         <!-- Entry Form -->
@@ -77,7 +79,7 @@
                             </div>
                             <button class="btn btn-light float-left" id="add-train-btn">Submit</button>
                             <br>
-                            <p id="new-train"></p>
+                            <p id="new-train" class="animated infinite flash slower"></p>
                         </form>
                     </div>
                 </div>

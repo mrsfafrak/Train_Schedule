@@ -11,20 +11,21 @@ h1,h3{
 }
 th{
     font-style: italic;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 .train-table{
     background-image: url("./images/tileable_wood_texture.png");
     border: 1px solid lightgray;
     font-family: 'Fjalla One', sans-serif;
     color: white;
-    letter-spacing: .1em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     text-shadow: 2px 2px 4px #000000;
 }
 .form-detail{
     font-family: 'Acme', sans-serif;
 }
-
 .train-card{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

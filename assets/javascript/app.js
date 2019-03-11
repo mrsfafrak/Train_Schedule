@@ -23,7 +23,7 @@ $("#add-train-btn").on("click", function (event) {
 
   // if any field is blank, user needs to try again
   if (trainName === "" || trainDest === "" || trainStartTime === "" || trainFreq === "") {
-    $("#new-train").text("You missed a field. Try again.");
+    $("#new-train").text("You missed one or more fields. Try again.");
     // clear form of entry
     $("#train-name-input").val("");
     $("#dest-input").val("");
