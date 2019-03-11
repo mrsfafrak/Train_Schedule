@@ -1,5 +1,9 @@
 # Train_Schedule
 
+### Received the following directions as a homework assignment for making a Train Schedule by using moment.js and firebase
+### Chose to add in an animate.css library to play with some effects
+### see directions below:
+
 ### Instructions
 
 * Make sure that your app suits this basic spec:
@@ -11,6 +15,4 @@
   * Code this app to calculate when the next train will arrive; this should be relative to the current time.
   * Users from many different machines must be able to view same train times.
   
-### Add To Your Portfolio
-
 
