@@ -21,23 +21,35 @@ $("#add-train-btn").on("click", function (event) {
   var trainStartTime = $("#start-time-input").val().trim();
   var trainFreq = $("#freq-input").val().trim();
 
-  // object of new train data
-  var newTrain = {
-    name: trainName,
-    dest: trainDest,
-    start: trainStartTime,
-    freq: trainFreq
-  };
-  // push newTrain data to database
-  database.ref().push(newTrain);
-  // alert new train has been added
-  $("#new-train").text("New train added successfully");
+  // if any field is blank, user needs to try again
+  if (trainName === "" || trainDest === "" || trainStartTime === "" || trainFreq === "") {
+    $("#new-train").text("You missed a field. Try again.");
+    // clear form of entry
+    $("#train-name-input").val("");
+    $("#dest-input").val("");
+    $("#start-time-input").val("");
+    $("#freq-input").val("");
+  }
+  // if all fields have data
+  else {
+    // object of new train data
+    var newTrain = {
+      name: trainName,
+      dest: trainDest,
+      start: trainStartTime,
+      freq: trainFreq
+    };
+    // push newTrain data to database
+    database.ref().push(newTrain);
+    // alert new train has been added
+    $("#new-train").text("New train added successfully!");
 
-  // clear form of entry
-  $("#train-name-input").val("");
-  $("#dest-input").val("");
-  $("#start-time-input").val("");
-  $("#freq-input").val("");
+    // clear form of entry
+    $("#train-name-input").val("");
+    $("#dest-input").val("");
+    $("#start-time-input").val("");
+    $("#freq-input").val("");
+  };
 });
 
 // when a child is added to firebase, the following happens
@@ -47,20 +59,21 @@ database.ref().on("child_added", function (childSnapshot) {
   var trainDest = childSnapshot.val().dest;
   var trainStartTime = childSnapshot.val().start;
   var trainFreq = childSnapshot.val().freq;
+  // variables needed to be calucated to add to train table row
   var nextArrival;
   var minutesAway;
-  // ensures the start time is in the past
-  var trainStartTimePast = moment(trainStartTime, "hh:mm").subtract(1, "years");
-
-  // difference in minutes between first train and now
+  // ensures the start time is in the past (subtracted a day off of time bc moment.js works with date and time)
+  var trainStartTimePast = moment(trainStartTime, "hh:mm").subtract(1, "days");
+  // difference in minutes between first train and now using difference in moment.js
   var diff = moment().diff(moment(trainStartTimePast), "minutes");
-  // 
+  // remainder left when you take into account the diff and train frequency
   var remainder = diff % trainFreq;
-  // calculate minutes away
+  // calculate minutes away for next train using the remainder left
   minutesAway = trainFreq - remainder;
   // time of day for next arrival
   var nextTrain = moment().add(minutesAway, "minutes");
-  nextArrival = moment(nextTrain).format("hh:mm");
+  // change format of next arrival time of day using moment.js
+  nextArrival = moment(nextTrain).format("hh:mm a");
 
   // Create the new row
   var newRow = $("<tr>").append(
