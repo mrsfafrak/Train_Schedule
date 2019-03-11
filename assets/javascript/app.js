@@ -73,7 +73,7 @@ database.ref().on("child_added", function (childSnapshot) {
   // time of day for next arrival
   var nextTrain = moment().add(minutesAway, "minutes");
   // change format of next arrival time of day using moment.js
-  nextArrival = moment(nextTrain).format("hh:mm a");
+  nextArrival = moment(nextTrain).format("ddd, h:mm a");
 
   // Create the new row
   var newRow = $("<tr>").append(
