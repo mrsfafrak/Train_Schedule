@@ -78,7 +78,7 @@ database.ref().on("child_added", function (childSnapshot) {
   var leftOverTime = diff % trainFreq;
   // calculate minutes away for next train using the remainder left
   minutesAway = trainFreq - leftOverTime;
-  // time of day for next arrival
+  // time of day for next arrival (add minutesAway to current time using moment.js)
   var nextTrain = moment().add(minutesAway, "minutes");
   // change format of next arrival time of day using moment.js
   nextArrival = moment(nextTrain).format("ddd, h:mm a");
