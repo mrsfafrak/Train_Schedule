@@ -21,9 +21,29 @@ $("#add-train-btn").on("click", function (event) {
   var trainStartTime = $("#start-time-input").val().trim();
   var trainFreq = $("#freq-input").val().trim();
 
+  var timeValid = /^\s*([01]?\d|2[0-3]):[0-5]\d\s*$/i;
+
   // if any field is blank, user needs to try again
   if (trainName === "" || trainDest === "" || trainStartTime === "" || trainFreq === "") {
     $("#new-train").text("You missed one or more fields. Try again.");
+    // clear form of entry
+    $("#train-name-input").val("");
+    $("#dest-input").val("");
+    $("#start-time-input").val("");
+    $("#freq-input").val("");
+  }
+  // if user enters a negative frequency, try again
+  else if (parseInt(trainFreq) < 0) {
+    $("#new-train").text("Train Frequency cannot be negative. Try again.");
+    // clear form of entry
+    $("#train-name-input").val("");
+    $("#dest-input").val("");
+    $("#start-time-input").val("");
+    $("#freq-input").val("");
+  }
+  // if user doesn't enter a valid entry time, try again
+  else if (!trainStartTime.match(timeValid)){
+    $("#new-train").text("Not a valid time entry. Try again.");
     // clear form of entry
     $("#train-name-input").val("");
     $("#dest-input").val("");
