@@ -10,6 +10,7 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
+// click listener event for add train button
 $("#add-train-btn").on("click", function (event) {
   // prevent page from reloading
   event.preventDefault();
@@ -17,38 +18,29 @@ $("#add-train-btn").on("click", function (event) {
   // get values from add train form
   var trainName = $("#train-name-input").val().trim();
   var trainDest = $("#dest-input").val().trim();
-  // var trainStartTime = moment($("#start-time-input").val().trim(), "HH:mm").format("X");
   var trainStartTime = $("#start-time-input").val().trim();
   var trainFreq = $("#freq-input").val().trim();
 
+  // variable used to validate time entry data 
   var timeValid = /^\s*([01]?\d|2[0-3]):[0-5]\d\s*$/i;
 
   // if any field is blank, user needs to try again
   if (trainName === "" || trainDest === "" || trainStartTime === "" || trainFreq === "") {
     $("#new-train").text("You missed one or more fields. Try again.");
     // clear form of entry
-    $("#train-name-input").val("");
-    $("#dest-input").val("");
-    $("#start-time-input").val("");
-    $("#freq-input").val("");
+    clearForm();
   }
   // if user enters a negative frequency, try again
   else if (parseInt(trainFreq) < 0) {
     $("#new-train").text("Train Frequency cannot be negative. Try again.");
     // clear form of entry
-    $("#train-name-input").val("");
-    $("#dest-input").val("");
-    $("#start-time-input").val("");
-    $("#freq-input").val("");
+    clearForm();
   }
   // if user doesn't enter a valid entry time, try again
   else if (!trainStartTime.match(timeValid)){
     $("#new-train").text("Not a valid time entry. Try again.");
     // clear form of entry
-    $("#train-name-input").val("");
-    $("#dest-input").val("");
-    $("#start-time-input").val("");
-    $("#freq-input").val("");
+    clearForm();
   }
   // if all fields have data
   else {
@@ -63,12 +55,8 @@ $("#add-train-btn").on("click", function (event) {
     database.ref().push(newTrain);
     // alert new train has been added
     $("#new-train").text("New train added successfully!");
-
     // clear form of entry
-    $("#train-name-input").val("");
-    $("#dest-input").val("");
-    $("#start-time-input").val("");
-    $("#freq-input").val("");
+    clearForm();
   };
 });
 
@@ -87,9 +75,9 @@ database.ref().on("child_added", function (childSnapshot) {
   // difference in minutes between first train and now using difference in moment.js
   var diff = moment().diff(moment(trainStartTimePast), "minutes");
   // remainder left when you take into account the diff and train frequency
-  var remainder = diff % trainFreq;
+  var leftOverTime = diff % trainFreq;
   // calculate minutes away for next train using the remainder left
-  minutesAway = trainFreq - remainder;
+  minutesAway = trainFreq - leftOverTime;
   // time of day for next arrival
   var nextTrain = moment().add(minutesAway, "minutes");
   // change format of next arrival time of day using moment.js
@@ -106,3 +94,12 @@ database.ref().on("child_added", function (childSnapshot) {
   // Append the new row to the table
   $("#train-table > tbody").append(newRow);
 });
+
+// function to clear form
+function clearForm(){
+  // clear form of entry
+  $("#train-name-input").val("");
+  $("#dest-input").val("");
+  $("#start-time-input").val("");
+  $("#freq-input").val("");
+}
